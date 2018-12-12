@@ -8,6 +8,8 @@
 if (!function_exists('route_class')) {
     function route_class()
     {
-        return str_replace('.', '-' ,Route::currentRouteName());
+        return str_replace('.', '-', Route::currentRouteName());
+        echo 33;
+
     }
 }
