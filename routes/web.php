@@ -16,5 +16,6 @@ Route::get('/', 'Home\HomeController@home')->name('home');
 Auth::routes();
 Route::resource('users',"Home\UsersController");
 
+Route::resource('topics', 'Home\TopicsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
 
-
+Route::resource('categories',"Home\CategoriesController",['only'=>['show']]);

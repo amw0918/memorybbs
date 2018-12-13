@@ -6,3 +6,7 @@ mews/captcha 图片验证码
 intervention/image 图片裁剪
 
 summerblue/generator 代码生成器
+
+itsgoingd/clockwork 浏览器调试
+
+hieu-le/active 导航栏选中

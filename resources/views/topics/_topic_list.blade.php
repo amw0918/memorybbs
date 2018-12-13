@@ -1,0 +1,60 @@
+@if (count($topics))
+
+    <ul class="media-list">
+        @foreach ($topics as $topic)
+            <li class="media">
+                <div class="media-left">
+                    <a href="{{ route('users.show', [$topic->user_id]) }}">
+                        <img class="media-object img-thumbnail" style="width: 52px; height: 52px;"
+                             src="{{ $topic->user->avatar }}" title="{{ $topic->user->username }}">
+                    </a>
+                </div>
+
+                <div class="media-body">
+
+                    <div class="media-heading">
+                        <a href="{{ route('topics.show', [$topic->id]) }}" title="{{ $topic->title }}">
+                            {{ $topic->title }}
+                        </a>
+                        <a class="" href="{{ route('topics.show', [$topic->id]) }}">
+                            <span class="badge badge-info float-right rounded-circle"> {{ $topic->reply_count }} </span>
+                        </a>
+                    </div>
+
+                    <div class="media-body meta">
+
+                        <a href="{{ route('categories.show',$topic->category_id) }}"
+                           title="{{ $topic->category->name }}">
+                            <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+                            {{ $topic->category->name }}
+                        </a>
+
+                        <span> • </span>
+                        <a href="{{ route('users.show', [$topic->user_id]) }}" title="{{ $topic->user->name }}">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                            {{ $topic->user->nickname }}
+                        </a>
+                        <span> • </span>
+                        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                        <span class="timeago" title="最后活跃于">
+                            @if(Request::get('order') =='recent')
+                                {{ $topic->created_at->diffForHumans() }}
+                            @else
+                                {{ $topic->updated_at->diffForHumans() }}
+                            @endif
+                        </span>
+                    </div>
+
+                </div>
+            </li>
+
+            @if ( ! $loop->last)
+                <hr>
+            @endif
+
+        @endforeach
+    </ul>
+
+@else
+    <div class="empty-block">暂无数据 ~_~</div>
+@endif
