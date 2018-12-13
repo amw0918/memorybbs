@@ -48,13 +48,17 @@
 
                     <ul class="nav nav-pills">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Ta 的话题</a>
+                            <a class="nav-link {{ active_class(if_query('tab',null)) }}" href="{{ route('users.show',$user->id) }}">{{ Auth::id() ==$user->id ? 'Wo' : 'Ta'  }} 的话题</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Ta 的回复</a>
+                            <a class="nav-link {{ active_class(if_query('tab','replies')) }}" href="{{ route('users.show',[$user->id,'tab' =>'replies']) }}">{{ Auth::id() ==$user->id ? 'Wo' : 'Ta'  }} 的回复</a>
                         </li>
                     </ul>
-                    @include('users._topics', ['topics' => $user->topics()->recent()->paginate(5)])
+                    @if(if_query('tab','replies'))
+                        @include('users._replies', ['replies' => $user->replies()->with('topic')->paginate(5)])
+                    @else
+                        @include('users._topics', ['topics' => $user->topics()->recent()->paginate(5)])
+                    @endif
                 </div>
             </div>
 

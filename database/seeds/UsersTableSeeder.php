@@ -15,7 +15,9 @@ class UsersTableSeeder extends Seeder
         // 生成数据集合
         $users = factory(User::class)
             ->times(10)
-            ->make();
+            ->make()->each(function($user){
+                $user->avatar='http://memorybbs.test/uploads/images/avatars/201812/12/1_1544622913_8yKywDRZ0KYoiGMXpng';
+            });
 
         // 让隐藏字段可见，并将数据集合转换为数组
         $user_array = $users->makeVisible(['password', 'remember_token'])->toArray();
