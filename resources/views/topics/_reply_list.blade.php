@@ -17,6 +17,7 @@
                     <span> •  </span>
                     <span class="meta" title="{{ $reply->created_at }}">{{ $reply->created_at->diffForHumans() }}</span>
 
+                    @can('destroy',$reply)
                     {{-- 回复删除按钮 --}}
                     <span class="meta pull-right" style="display: inline-block">
                         <form action="{{ route('replies.destroy',[ 'id'=>$reply->id]) }}" method="post">
@@ -26,6 +27,7 @@
                             <button type="submit" class="btn btn-link">删除</button>
                         </form>
                     </span>
+                        @endcan
                 </div>
                 <div class="reply-content">
                     {!! $reply->content !!}
